@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "31586141613",
+    "project_id": "bytecraft-org--instagram",
+    "storage_bucket": "bytecraft-org--instagram.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31586141613:android:e84f264acb26e2bb248d24",
+        "android_client_info": {
+          "package_name": "com.bytecraft.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31586141613-s1po7peovec3oj39rps8ub0kqipgra7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaRNBt8gs3zzFImZmAgHq-LwX7Xk4Ttuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31586141613-s1po7peovec3oj39rps8ub0kqipgra7m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "31586141613-b693ul60siffpcbfa5i1kp938hr6u987.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.instagram.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

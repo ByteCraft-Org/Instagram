@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>31586141613-qakghgtmu19bt7d8h84hrau3cggf1ehr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.31586141613-qakghgtmu19bt7d8h84hrau3cggf1ehr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>31586141613-8imlddg2rs8agm5otp5k67mlrruf2o6d.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBjdiZAy3QWazwSeACbexL2BUQSM7GFCjo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>31586141613</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.bytecraft.instagram</string>
+	<key>PROJECT_ID</key>
+	<string>bytecraft-org--instagram</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bytecraft-org--instagram.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:31586141613:ios:ed72defcdf85e1a3248d24</string>
+</dict>
+</plist>
