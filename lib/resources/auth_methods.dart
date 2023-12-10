@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/utils/keys.dart';
+import 'package:instagram/models/users.dart' as model;
 
 class AuthMethods{
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -42,6 +45,44 @@ class AuthMethods{
       
       res = correctKey;
     } on FirebaseAuthException catch (err) {
+      res = err.toString();
+    }
+
+    return res;
+  }
+
+  // * : SignUp User
+  Future<String> signUpUser({
+    required Uint8List profileImage,
+    required String userName,
+    required String emailAddress,
+    required String password
+  }) async {
+    String res = "Some error occured";
+    try {
+      String uid = _auth.currentUser!.uid;
+
+      model.User user = model.User(
+        uid : uid,
+        fullName : "",
+        birthday : "",
+        gender : "",
+        bio : "",
+        profileImageUrl : "",
+        username : userName,
+        emailAddress : emailAddress,
+        followers : [],
+        following : [],
+      );
+
+      // * : Add User to users collection
+      await FirebaseFirestore.instance
+      .collection(usersCollectionKey)
+      .doc(uid)
+      .set(user.toJson());
+
+      res = correctKey;
+    } catch (err) {
       res = err.toString();
     }
 
