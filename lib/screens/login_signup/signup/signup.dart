@@ -47,6 +47,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizedBox instagramLogo = SizedBox(// * : Instagram Logo
+      height: 50,
+      width: double.infinity,
+      child: SvgPicture.asset(
+        "assets/images/ic_instagram.svg",
+        colorFilter: const ColorFilter.mode(primaryColor, BlendMode.srcIn),
+        alignment: Alignment.center,
+      ),
+    );
+
+    Stack profileImage = Stack(// * : Profile Image
+      children: [
+        _selectedImage != null
+        ? CircleAvatar(radius: 72, backgroundImage: MemoryImage(_selectedImage!))
+        : const CircleAvatar(radius: 72, backgroundImage: AssetImage("assets/images/defaultProfilePicture.jpg")),
+        if(_isImageAdded)
+          Positioned(// * : Remove Icon
+            right: -5, top: -5,
+            child: GestureDetector(
+              onTap: () => setState(() => _loadDefaultImage()),
+              child: const Icon(Icons.close, size: 30)
+            ),
+          ),
+        Positioned(// * : Camera Icon
+          right: 0, bottom: 10,
+          child: GestureDetector(
+            onTap: () => setState(() => _selectImage()),
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: blueColor
+              ),
+              child: const Icon(Icons.camera_alt),
+            )
+          ),
+        )
+      ]
+    );
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -63,69 +103,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: getScreenHeight(context) * 0.05),
-                    SizedBox(// * : Instagram Logo
-                      height: 50,
-                      width: double.infinity,
-                      child: SvgPicture.asset(
-                        "assets/images/ic_instagram.svg",
-                        colorFilter: const ColorFilter.mode(
-                          primaryColor,
-                          BlendMode.srcIn,
-                        ),
-                        alignment: Alignment.center,
-                      ),
-                    ),
+                    instagramLogo,
                     SizedBox(height: getScreenHeight(context) * 0.05),
-                    Stack(// * : Profile Image
-                      children: [
-                        _selectedImage != null
-                        ? CircleAvatar(
-                          radius: 72,
-                          backgroundImage: MemoryImage(_selectedImage!),
-                        )
-                        : const CircleAvatar(
-                          radius: 72,
-                          backgroundImage: AssetImage("assets/images/defaultProfilePicture.jpg"),
-                        ),
-                        if(_isImageAdded)
-                          Positioned(// * : Remove Icon
-                            right: -5,
-                            top: -5,
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _loadDefaultImage();
-                                });
-                              },
-                              child: const Icon(
-                                Icons.close,
-                                size: 30,
-                              )
-                            ),
-                          ),
-                        Positioned(// * : Camera Icon
-                          right: 0,
-                          bottom: 10,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _selectImage();
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: blueColor
-                              ),
-                              child: const Icon(
-                                Icons.camera_alt
-                              ),
-                            )
-                          ),
-                        )
-                      ]
-                    ),
+                    profileImage,
                     SizedBox(height: getScreenHeight(context) * 0.02),
                     CustomTextField(// * : Text Field input
                       controller: usernameController,
