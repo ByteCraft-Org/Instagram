@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:instagram/resources/storage_methods.dart';
 import 'package:instagram/utils/keys.dart';
 import 'package:instagram/models/users.dart' as model;
 
@@ -62,13 +63,16 @@ class AuthMethods{
     try {
       String uid = _auth.currentUser!.uid;
 
+      // * : Get photo url from firebase storage
+      String photoUrl = await StorageMethods().uploadImageToStorage(profileImageChildKey, profileImage, false);
+
       model.User user = model.User(
         uid : uid,
         fullName : "",
         birthday : "",
         gender : "",
         bio : "",
-        profileImageUrl : "",
+        profileImageUrl : photoUrl,
         username : userName,
         emailAddress : emailAddress,
         followers : [],
