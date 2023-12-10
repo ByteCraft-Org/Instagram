@@ -141,9 +141,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       labelText: "Email address",
                     ),
                     SizedBox(height: getScreenHeight(context) * 0.02),
-                    CustomTextField(// * : Password Input
+                    CustomPasswordTextField(// * : Password Input
                       controller: passwordController,
-                      keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.done,
                       labelText: "New Password",
                     ),
@@ -168,6 +167,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void performFunction(context) async {
+    final RegExp emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+
+    if (usernameController.text.isEmpty) {
+      customSnackbar(context: context, type: "Error", message: "Username cannot be empty.");
+      return ;
+    } else if(emailController.text.isEmpty) {
+      customSnackbar(context: context, type: "Error", message: "Email address cannot be empty.");
+      return ;
+    } else if(!emailRegex.hasMatch(emailController.text)) {
+      customSnackbar(context: context, type: "Warning", message: "Email address is not formatted.");
+      return ;
+    } else if(passwordController.text.isEmpty) {
+      customSnackbar(context: context, type: "Error", message: "Password cannot be empty.",);
+      return ;
+    } else if (passwordController.text.length < 6) {
+      customSnackbar(context: context, type: "Warning", message: "This password is too short.",);
+      return ;
+    }
+
     customSnackbar(context: context, type: "Success", message: "Sign In Successfully");
   }
 }
