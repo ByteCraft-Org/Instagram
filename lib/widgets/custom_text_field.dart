@@ -30,7 +30,14 @@ class CustomTextField extends StatelessWidget {
         textInputAction: textInputAction,
         maxLines: maxLines,
 
+        cursorColor: Colors.white,
+
         obscureText: labelText.contains("Password"),
+
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w600
+        ),
 
         decoration: InputDecoration(
           isDense: true,
@@ -90,7 +97,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxHeight: getScreenHeight(context) * 0.75,
+        maxHeight: getScreenHeight(context) * 0.069,
       ),
       child: TextFormField(
         controller: widget.controller,
@@ -98,8 +105,15 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
         textInputAction: widget.textInputAction,
         maxLines: 1,
 
+        cursorColor: Colors.white,
+      
         obscureText: obscureText,
 
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w600
+        ),
+      
         decoration: InputDecoration(
           isDense: true,
           fillColor: Colors.transparent,
@@ -130,7 +144,8 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
 
           suffixIcon: IconButton(
             icon: Icon(
-              obscureText ? Icons.visibility : Icons.visibility_off
+              obscureText ? Icons.visibility : Icons.visibility_off,
+              color: Colors.grey,
             ),
             onPressed: () {
               setState(() {
