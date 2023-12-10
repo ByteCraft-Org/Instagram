@@ -56,8 +56,7 @@ class AuthMethods{
   Future<String> signUpUser({
     required Uint8List profileImage,
     required String userName,
-    required String emailAddress,
-    required String password
+    required String emailAddress
   }) async {
     String res = "Some error occured";
     try {

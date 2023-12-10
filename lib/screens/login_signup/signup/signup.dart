@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/resources/pick_image.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/dimensions.dart';
+import 'package:instagram/utils/keys.dart';
 import 'package:instagram/widgets/custom_button.dart';
 import 'package:instagram/widgets/custom_snackbar.dart';
 import 'package:instagram/widgets/custom_text_field.dart';
@@ -166,6 +168,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return ;
     }
 
-    customSnackbar(context: context, type: "Success", message: "Sign In Successfully");
+    setState(() => isLoading = true);
+
+    // * : Register User
+    String registerResult = await AuthMethods().registerUser(
+      email: emailController.text,
+      password: passwordController.text
+    );
+
+    if(registerResult == correctKey) {
+      customSnackbar(context: context, type: "Success", message: "Registered Successfully");
+    } else {
+      customSnackbar(context: context, type: "Error", message: registerResult);
+      setState(() => isLoading = false);
+      return ;
+    }
+
+    // * : SignUp User
+    String signUpResult =  await AuthMethods().signUpUser(
+      profileImage: _selectedImage ?? Uint8List(0),
+      userName: usernameController.text,
+      emailAddress: emailController.text
+    );
+
+    if(signUpResult == correctKey) {
+      customSnackbar(context: context, type: "Success", message: "Sign Up Successfully");
+    } else {
+      customSnackbar(context: context, type: "Error", message: signUpResult);
+    }
+
+    setState(() => isLoading = false);
   }
 }
