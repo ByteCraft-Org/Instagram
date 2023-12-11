@@ -91,4 +91,25 @@ class AuthMethods{
 
     return res;
   }
+
+  // * : SignIn User
+  Future<String> signInUser({
+    required String emailAddress,
+    required String password,
+  }) async {
+    String res = "Some error occured";
+
+    try {
+      if(emailAddress.isNotEmpty || password.isNotEmpty){
+
+        // * : Signing in User with email
+        await _auth.signInWithEmailAndPassword(email: emailAddress, password: password);
+        res = correctKey;
+      }
+    } catch (err) {
+      res = err.toString();
+    }
+
+    return res;
+  }
 }
