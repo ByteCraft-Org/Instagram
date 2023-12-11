@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram/pages/login_signup/login/forgot_password.dart';
 import 'package:instagram/pages/login_signup/signup/signup_page.dart';
 import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/utils/colors.dart';
@@ -75,7 +76,21 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       labelText: "Log in",
                     ),
-                    SizedBox(height: getScreenHeight(context) * 0.29),
+                    SizedBox(height: getScreenHeight(context) * 0.02),
+                    CustomTextButton(
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordPage()
+                          )
+                        );
+                      },
+                      labelText: "Forgotten Password?",
+                      textColor: Colors.white,
+                    ),
+                    SizedBox(height: getScreenHeight(context) * 0.27),
                     CustomButton(// * : Create New Account Button
                       onTap: (){
                         FocusScope.of(context).unfocus();
@@ -102,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> performFunction(context) async {
+    FocusScope.of(context).unfocus();
     final RegExp emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
     if(_emailController.text.isEmpty) {

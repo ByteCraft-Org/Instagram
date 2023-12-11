@@ -158,6 +158,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void performFunction(context) async {
+    FocusScope.of(context).unfocus();
     final RegExp emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
     if (usernameController.text.isEmpty) {
