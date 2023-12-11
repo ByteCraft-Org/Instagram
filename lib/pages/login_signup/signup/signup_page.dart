@@ -139,6 +139,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       labelText: "Sign Up",
                     ),
                     SizedBox(height: getScreenHeight(context) * 0.02),
+                    CustomTextButton(// * : Create New Account Button
+                      onTap: (){
+                        FocusScope.of(context).unfocus();
+                        Navigator.pop(context);
+                      },
+                      labelText: "Already have an account",
+                      textColor: blueColor,
+                    )
                   ],
                 ),
               ),

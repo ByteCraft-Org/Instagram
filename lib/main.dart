@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/firebase_options.dart';
-import 'package:instagram/pages/login_signup/signup/signup.dart';
+import 'package:instagram/pages/login_signup/login/login_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: SignUpPage()
+      home: LoginPage()
     );
   }
 }
