@@ -112,4 +112,20 @@ class AuthMethods{
 
     return res;
   }
+
+  // * : Reset Password
+  Future<String> resetPassword({
+    required String email
+  }) async {
+    String res = "Some error occured";
+
+    try{
+      await _auth.sendPasswordResetEmail(email: email);
+      res = correctKey;
+    } on FirebaseAuthException catch(err) {
+      res = err.toString();
+    }
+
+    return res;
+  }
 }
