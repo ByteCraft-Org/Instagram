@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,7 +9,6 @@ import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/dimensions.dart';
 import 'package:instagram/utils/keys.dart';
 import 'package:instagram/widgets/custom_button.dart';
-import 'package:instagram/widgets/custom_progress_indicator.dart';
 import 'package:instagram/widgets/custom_snackbar.dart';
 import 'package:instagram/widgets/custom_text_field.dart';
 

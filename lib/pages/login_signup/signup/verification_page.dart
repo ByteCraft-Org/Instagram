@@ -30,7 +30,10 @@ class _VerificationPageState extends State<VerificationPage> {
   final auth = FirebaseAuth.instance;
   late User user;
   late Timer timer;
+  
   bool isVerified = false;
+  bool isResendButtonEnabled = false;
+  int timerSeconds = 90;
 
   @override
   void initState() {
@@ -43,6 +46,8 @@ class _VerificationPageState extends State<VerificationPage> {
         checkEmailVerifed(context);
       }
     );
+
+    startTimer();
 
     super.initState();
   }
@@ -124,11 +129,15 @@ class _VerificationPageState extends State<VerificationPage> {
                     children: [
                       Expanded(child: Container()),
                       CustomButton(
-                        onTap: () {},
-                        labelText: "Resend Verification Link",
-                        borderColor: blueColor,
+                        onTap: () => isResendButtonEnabled
+                        ? resendVerification()
+                        : null,
+                        labelText: isResendButtonEnabled
+                            ? "Resend Verification Link"
+                            : "Resend link in $timerSeconds seconds",
+                        borderColor: isResendButtonEnabled ? blueColor : Colors.grey,
                         buttonColor: Colors.transparent,
-                        textColor: blueColor,
+                        textColor: isResendButtonEnabled ? blueColor : Colors.grey,
                       ),
                     ],
                   ),
@@ -137,6 +146,34 @@ class _VerificationPageState extends State<VerificationPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void resendVerification() {
+    user.sendEmailVerification();
+    setState(() {
+      isResendButtonEnabled = false;
+    });
+    startTimer();
+  }
+
+  void startTimer() {
+    timerSeconds = 90;
+    const oneSecond = Duration(seconds: 1);
+    Timer.periodic(
+      oneSecond,
+      (Timer timer) {
+        if (timerSeconds == 0) {
+          setState(() {
+            isResendButtonEnabled = true;
+          });
+          timer.cancel();
+        } else {
+          setState(() {
+            timerSeconds--;
+          });
+        }
+      },
     );
   }
 
