@@ -178,9 +178,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     if(usernameAvailability == correctKey) {
-      customSnackbar(context: context, type: "Info", message: "Username ${usernameController.text} is available");
     } else if(usernameAvailability == inCorrectKey) {
-      customSnackbar(context: context, type: "Warning", message: "Username ${usernameController.text} is not available");
+      customSnackbar(context: context, type: "Error", message: "Username ${usernameController.text} is not available");
       setState(() => isLoading = false);
       return ;
     } else {
@@ -196,9 +195,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     if(registerResult == correctKey) {
-      customSnackbar(context: context, type: "Info", message: "Registered Successfully");
     } else {
-      customSnackbar(context: context, type: "Warning", message: registerResult);
+      customSnackbar(context: context, type: "Error", message: registerResult);
       setState(() => isLoading = false);
       return ;
     }
