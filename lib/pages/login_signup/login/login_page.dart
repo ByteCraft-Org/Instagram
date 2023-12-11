@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:instagram/pages/home_page/home_page.dart';
+import 'package:instagram/pages/landing_page/app_landing_page.dart';
 import 'package:instagram/pages/login_signup/login/forgot_password.dart';
 import 'package:instagram/pages/login_signup/signup/signup_page.dart';
 import 'package:instagram/resources/auth_methods.dart';
@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
     if(loginResult == correctKey) {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const AppLandingPage()),
         (route) => false,
       );
     } else {

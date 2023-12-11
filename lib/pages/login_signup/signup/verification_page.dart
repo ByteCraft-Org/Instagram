@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:instagram/pages/home_page/home_page.dart';
+import 'package:instagram/pages/landing_page/app_landing_page.dart';
 import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/keys.dart';
@@ -198,7 +198,7 @@ class _VerificationPageState extends State<VerificationPage> {
     if(signUpResult == correctKey) {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const AppLandingPage()),
         (route) => false,
       );
     } else {

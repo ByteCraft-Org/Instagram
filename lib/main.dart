@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/firebase_options.dart';
-import 'package:instagram/pages/home_page/home_page.dart';
+import 'package:instagram/pages/landing_page/app_landing_page.dart';
 import 'package:instagram/pages/login_signup/login/login_page.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/widgets/custom_progress_indicator.dart';
@@ -46,7 +46,7 @@ class AuthChecker extends StatelessWidget {
               FirebaseAuth.instance.currentUser?.delete();
               return const LoginPage();
             } else {
-              return const HomePage();
+              return const AppLandingPage();
             }
           }
         } else {
