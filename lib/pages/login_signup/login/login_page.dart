@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/pages/login_signup/signup/signup_page.dart';
+import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/dimensions.dart';
+import 'package:instagram/utils/keys.dart';
 import 'package:instagram/widgets/custom_button.dart';
 import 'package:instagram/widgets/custom_snackbar.dart';
 import 'package:instagram/widgets/custom_text_field.dart';
@@ -18,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                     CustomTextField(// * : Email Input
                       controller: _emailController,
                       labelText: "Email address",
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                     ),
                     SizedBox(height: getScreenHeight(context) * 0.025),
@@ -63,10 +67,11 @@ class _LoginPageState extends State<LoginPage> {
                       keyboardType: TextInputType.text,
                     ),
                     SizedBox(height: getScreenHeight(context) * 0.025),
-                    CustomButton(// * : Login Button
+                    CustomButtonWithLoading(// * : Login Button
+                      isLoading: isLoading,
                       onTap: (){
                         FocusScope.of(context).unfocus();
-                        doSignIn(context);
+                        performFunction(context);
                       },
                       labelText: "Log in",
                     ),
@@ -96,8 +101,54 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<void> doSignIn(context) async {
-    customSnackbar(context: context, type: "Success", message: "Logined Successfully");
+  Future<void> performFunction(context) async {
+    final RegExp emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+
+    if(_emailController.text.isEmpty) {
+      customSnackbar(context: context, type: "Error", message: "Email address cannot be empty.");
+      return ;
+    } else if(!emailRegex.hasMatch(_emailController.text)) {
+      customSnackbar(context: context, type: "Warning", message: "Email address is not formatted.");
+      return ;
+    } else if(_passwordController.text.isEmpty) {
+      customSnackbar(context: context, type: "Error", message: "Password cannot be empty.",);
+      return ;
+    }
+
+    setState(() => isLoading = true);
+
+    // * : Check whether email is present or not
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: 'dummyPassword', // A dummy password just to check if the email exists
+      );
+      await userCredential.user?.delete();
+
+      customSnackbar(context: context, type: "Error", message: "Email ${_emailController.text} is not registered");
+      setState(() => isLoading = false);
+      return ;
+    } on FirebaseAuthException catch (err) {
+      if (err.code != 'email-already-in-use') {
+        customSnackbar(context: context, type: "Error", message: err.toString());
+        setState(() => isLoading = false);
+        return ;
+      }
+    }
+
+    // * : Login User
+    String loginResult = await AuthMethods().signInUser(
+      emailAddress: _emailController.text,
+      password: _passwordController.text
+    );
+
+    if(loginResult == correctKey) {
+      customSnackbar(context: context, type: "Success", message: "Logined Successfully");
+    } else {
+      customSnackbar(context: context, type: "Error", message: loginResult);
+    }
+
+    setState(() => isLoading = false);
   }
 
   @override
