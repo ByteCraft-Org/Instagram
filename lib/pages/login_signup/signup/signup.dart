@@ -1,24 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram/pages/login_signup/signup/verification_page.dart';
 import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/resources/pick_image.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/dimensions.dart';
 import 'package:instagram/utils/keys.dart';
 import 'package:instagram/widgets/custom_button.dart';
+import 'package:instagram/widgets/custom_progress_indicator.dart';
 import 'package:instagram/widgets/custom_snackbar.dart';
 import 'package:instagram/widgets/custom_text_field.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -194,26 +197,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
       password: passwordController.text
     );
 
+    // * : Verify User
     if(registerResult == correctKey) {
+      setState(() => isLoading = false);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VerificationPage(
+            selectedImage: _selectedImage ?? Uint8List(0),
+            username: usernameController.text,
+            email: emailController.text
+          )
+        )
+      );
     } else {
       customSnackbar(context: context, type: "Error", message: registerResult);
       setState(() => isLoading = false);
       return ;
     }
-
-    // * : SignUp User
-    String signUpResult =  await AuthMethods().signUpUser(
-      profileImage: _selectedImage ?? Uint8List(0),
-      userName: usernameController.text,
-      emailAddress: emailController.text
-    );
-
-    if(signUpResult == correctKey) {
-      customSnackbar(context: context, type: "Success", message: "Sign Up Successfully");
-    } else {
-      customSnackbar(context: context, type: "Error", message: signUpResult);
-    }
-
-    setState(() => isLoading = false);
   }
 }
