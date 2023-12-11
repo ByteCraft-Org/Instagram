@@ -13,15 +13,15 @@ class AuthMethods{
   Future<String> isUserDetailPresent({
     required String whichCollectionKey,
     required String fromWhichKey,
-    required String whichDetail,
+    required String toWhichDetail,
   }) async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
       .collection(whichCollectionKey)
-      .where(fromWhichKey, isEqualTo: whichDetail)
+      .where(fromWhichKey, isEqualTo: toWhichDetail)
       .get();
 
-      if(querySnapshot.docs.isNotEmpty) {
+      if(querySnapshot.docs.isEmpty) {
         return correctKey;
       } else {
         return inCorrectKey;

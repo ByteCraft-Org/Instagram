@@ -170,6 +170,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     setState(() => isLoading = true);
 
+    // * : Check whether username is available or not
+    String usernameAvailability = await AuthMethods().isUserDetailPresent(
+      whichCollectionKey: usersCollectionKey,
+      fromWhichKey: usernameKey,
+      toWhichDetail: usernameController.text
+    );
+
+    if(usernameAvailability == correctKey) {
+      customSnackbar(context: context, type: "Info", message: "Username ${usernameController.text} is available");
+    } else if(usernameAvailability == inCorrectKey) {
+      customSnackbar(context: context, type: "Warning", message: "Username ${usernameController.text} is not available");
+      setState(() => isLoading = false);
+      return ;
+    } else {
+      customSnackbar(context: context, type: "Error", message: usernameAvailability);
+      setState(() => isLoading = false);
+      return ;
+    }
+
     // * : Register User
     String registerResult = await AuthMethods().registerUser(
       email: emailController.text,
@@ -177,9 +196,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     if(registerResult == correctKey) {
-      customSnackbar(context: context, type: "Success", message: "Registered Successfully");
+      customSnackbar(context: context, type: "Info", message: "Registered Successfully");
     } else {
-      customSnackbar(context: context, type: "Error", message: registerResult);
+      customSnackbar(context: context, type: "Warning", message: registerResult);
       setState(() => isLoading = false);
       return ;
     }
