@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,9 +26,9 @@ class _AppLandingPageState extends State<AppLandingPage> {
     return Scaffold(
       body: PageView(
         controller: pageController,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         onPageChanged: onPageChanged,
-        children: [
+        children: const [
           Center(child: Text("Home")),
           Center(child: Text("Search")),
           Center(child: Text("Add Post")),
@@ -44,25 +42,26 @@ class _AppLandingPageState extends State<AppLandingPage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_rounded,
+              _page == 0 ? Icons.home_rounded : Icons.home_outlined,
               color: _page == 0 ? primaryColor : secondaryColor,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Ionicons.search,
+              Icons.search,
+              size: _page == 1 ? 32 : null,
               color: _page == 1 ? primaryColor : secondaryColor,
             )
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Ionicons.add_circle,
+              _page == 2 ? Ionicons.add_circle : Ionicons.add_circle_outline,
               color: _page == 2 ? primaryColor : secondaryColor,
             )
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/images/ic_reel.svg",
+              _page == 3 ? "assets/images/ic_reel.svg" : "assets/images/ic_reel_outlined.svg",
               colorFilter: ColorFilter.mode(
               _page == 3 ? primaryColor : secondaryColor, BlendMode.srcIn
               )
@@ -70,9 +69,9 @@ class _AppLandingPageState extends State<AppLandingPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.account_box,
+              _page == 4 ? Icons.person : Icons.person_outline_outlined,
               color: _page == 4 ? primaryColor : secondaryColor,
-            )
+            ),
           ),
         ],
         onTap: navigationTapped,

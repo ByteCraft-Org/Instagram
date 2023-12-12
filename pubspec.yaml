@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   cloud_firestore: ^4.13.5
+  cupertino_icons: ^1.0.6
   firebase_auth: ^4.15.2
   firebase_core: ^2.24.2
   firebase_storage: ^11.5.5
@@ -17,8 +18,6 @@ dependencies:
   flutter_svg: ^2.0.9
   image_picker: ^1.0.4
   ionicons: ^0.2.2
-  line_awesome_flutter: ^2.0.0
-  mdi: ^5.0.0-nullsafety.0
   rename: ^3.0.1
 
 dev_dependencies:
@@ -33,3 +32,4 @@ flutter:
     - assets/images/ic_instagram.svg
     - assets/images/defaultProfilePicture.jpg
     - assets/images/ic_reel.svg
+    - assets/images/ic_reel_outlined.svg
