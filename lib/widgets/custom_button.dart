@@ -107,12 +107,16 @@ class CustomTextButton extends StatelessWidget {
   final Function() onTap;
   final String labelText;
   final Color textColor;
+  final double size;
+  final FontWeight fontWeight;
 
   const CustomTextButton({
     super.key,
     required this.onTap,
     required this.labelText,
     this.textColor = blueColor,
+    this.size = 15,
+    this.fontWeight = FontWeight.normal
   });
 
   @override
@@ -123,8 +127,8 @@ class CustomTextButton extends StatelessWidget {
         labelText,
         style: TextStyle(
           color: textColor,
-          fontSize: 15,
-          fontWeight: FontWeight.normal
+          fontSize: size,
+          fontWeight: fontWeight
         ),
       ),
     );
