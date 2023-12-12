@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/pages/landing_page/nav_bar_pages/add_post_page.dart';
 import 'package:instagram/utils/colors.dart';
+import 'package:instagram/utils/global_variables.dart';
 import 'package:ionicons/ionicons.dart';
 
 class AppLandingPage extends StatefulWidget {
@@ -31,13 +32,7 @@ class _AppLandingPageState extends State<AppLandingPage> {
           controller: pageController,
           physics: const NeverScrollableScrollPhysics(),
           onPageChanged: onPageChanged,
-          children: const [
-            Center(child: Text("Home")),
-            Center(child: Text("Search")),
-            Center(child: Text("Add Post")),
-            Center(child: Text("Reels")),
-            Center(child: Text("Profile")),
-          ],
+          children: navigationBarItems,
         ),
       ),
       bottomNavigationBar: CupertinoTabBar(
@@ -91,10 +86,11 @@ class _AppLandingPageState extends State<AppLandingPage> {
     setState(() {
       if (page == 2) {
         previousPage = _page;
+      } else {
+        _page = page;
       }
-      _page = page;
     });
-    if (_page == 2) {
+    if (page == 2) {
       Navigator.push(
         context,
         PageRouteBuilder(

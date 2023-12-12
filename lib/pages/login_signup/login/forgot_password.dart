@@ -5,7 +5,7 @@ import 'package:instagram/utils/keys.dart';
 import 'package:instagram/widgets/custom_dialog.dart';
 
 import '../../../../utils/colors.dart';
-import '../../../../utils/dimensions.dart';
+import '../../../utils/global_variables.dart';
 import '../../../../widgets/custom_button.dart';
 import '../../../../widgets/custom_text_field.dart';
 import '../../../widgets/custom_snackbar.dart';

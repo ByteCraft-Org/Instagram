@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/dimensions.dart';
+import 'package:instagram/utils/global_variables.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;

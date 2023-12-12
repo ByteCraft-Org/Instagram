@@ -6,7 +6,7 @@ import 'package:instagram/pages/login_signup/login/forgot_password.dart';
 import 'package:instagram/pages/login_signup/signup/signup_page.dart';
 import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/dimensions.dart';
+import 'package:instagram/utils/global_variables.dart';
 import 'package:instagram/utils/keys.dart';
 import 'package:instagram/widgets/custom_button.dart';
 import 'package:instagram/widgets/custom_snackbar.dart';

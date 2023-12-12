@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../utils/dimensions.dart';
+import '../utils/global_variables.dart';
 
 class CustomCircularProgressIndicator extends StatelessWidget {
   final double size;
