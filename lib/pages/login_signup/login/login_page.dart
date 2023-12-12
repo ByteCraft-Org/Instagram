@@ -63,10 +63,9 @@ class _LoginPageState extends State<LoginPage> {
                       textInputAction: TextInputAction.next,
                     ),
                     SizedBox(height: getScreenHeight(context) * 0.025),
-                    CustomTextField(// * : Password Input
+                    CustomPasswordTextField(// * : Password Input
                       controller: _passwordController,
                       labelText: "Password",
-                      keyboardType: TextInputType.text,
                     ),
                     SizedBox(height: getScreenHeight(context) * 0.025),
                     CustomButtonWithLoading(// * : Login Button
