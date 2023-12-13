@@ -69,7 +69,10 @@ class _SignUpPageState extends State<SignUpPage> {
           Positioned(// * : Remove Icon
             right: -5, top: -5,
             child: GestureDetector(
-              onTap: () => setState(() => _loadDefaultImage()),
+              onTap: () => setState(() {
+                _loadDefaultImage();
+                _isImageAdded = false;
+              }),
               child: const Icon(Icons.close, size: 30)
             ),
           ),
